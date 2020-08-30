@@ -1,6 +1,6 @@
 {
   "name": "@react-gen/react-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI for developing applications with react.",
   "author": "Mitch Warrenburg <mitchwarrenburg@yahoo.com>",
   "homepage": "https://github.com/mitch-warrenburg/cgen/tree/master/packages/react-cli#readme",
