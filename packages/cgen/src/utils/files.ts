@@ -1,4 +1,5 @@
-import * as path from 'path';
+const fs = require('fs');
+const path = require('path');
 const shell = require('shelljs');
 import { Set } from 'immutable';
 import { LocalsObject } from 'pug';
@@ -50,7 +51,13 @@ export const resolveFilePath = (
 export const writeFile = (filePath: string, content: string) => {
   try {
     logger.info('Writing file to path %s...', filePath);
-    shell.cat(filePath).to(content);
+
+    try {
+      fs.writeFileSync(filePath, content, 'utf8');
+    } catch (e) {
+      logFatalAndTerminate(e);
+    }
+
     logger.success('Successfully generated %s.', path.basename(filePath));
   } catch (e) {
     logFatalAndTerminate(e);

@@ -43,11 +43,12 @@ export type TerminalColor =
   | 'background';
 
 export interface CgenCliOptions {
-  failFast: boolean;
-  overwrite: boolean;
+  failFast?: boolean;
+  overwrite?: boolean;
 }
 
 export interface CgenCliInput {
+  jobName: string;
   options: CgenCliOptions;
-  parameters: Array<string>;
+  parameters?: Array<string>;
 }

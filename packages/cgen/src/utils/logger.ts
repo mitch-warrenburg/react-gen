@@ -47,7 +47,9 @@ ${content}
 };
 
 export const logCgenConfig = (resolvedJobConfig: JobConfig) => {
-  logger.info(`Resolved job configuration: 
+  logger.info(`
+  
+  Resolved job configuration: 
 
 ${JSON.stringify(resolvedJobConfig, null, 4)}`);
 };

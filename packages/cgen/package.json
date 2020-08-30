@@ -4,7 +4,7 @@
   "description": "Generate boilerplate for React-based projects.",
   "author": "Mitch Warrenburg",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "index.js",
   "homepage": "https://github.com/mitch-warrenburg/cgen#readme",
   "repository": {
     "type": "git",
@@ -12,9 +12,6 @@
   },
   "bugs": {
     "url": "https://github.com/mitch-warrenburg/cgen/issues"
-  },
-  "bin": {
-    "react-cli": "./dist/react-cli.cjs"
   },
   "publishConfig": {
     "access": "public"
@@ -31,7 +28,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format && npm run lint && git add ."
+      "pre-commit": ""
     }
   },
   "dependencies": {
@@ -68,8 +65,8 @@
     "typescript": "^4.0.2"
   },
   "scripts": {
-    "build": "npm run clean && rollup -c && cp dist/index.js .",
-    "clean": "rimraf dist coverage",
+    "build": "npm run clean && rollup -c",
+    "clean": "rimraf dist coverage index.js",
     "lint": "eslint 'packages/src/**/*.{js,ts}'",
     "format": "prettier --write 'packages/src/**/*.{js,ts}'"
   }

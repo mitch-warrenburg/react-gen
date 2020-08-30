@@ -13,10 +13,10 @@ const DEFAULT_REACT_TEMPLATE_OUT_PATH: Readonly<string> =
 
 export const REACT_TS_CONFIG: JobConfig = {
   fileNames: {
-    test: 'test.tsx',
-    index: 'cli.ts',
+    index: 'index.ts',
     types: 'types.ts',
     component: '#{componentName}.tsx',
+    test: '#{componentName}.test.tsx',
   },
   outPath: DEFAULT_REACT_TEMPLATE_OUT_PATH,
   templates: { includePaths: ['src/templates/react-ts'] },
@@ -25,10 +25,10 @@ export const REACT_TS_CONFIG: JobConfig = {
 export const REACT_TS_STORYBOOK_CONFIG: JobConfig = {
   fileNames: {
     mdx: 'mdx.ts',
-    test: 'test.tsx',
-    index: 'cli.ts',
+    index: 'index.ts',
     types: 'types.ts',
     dirName: '#{componentName}',
+    test: '#{componentName}.test.tsx',
     component: '#{componentName}.tsx',
     story: '#{componentName}.story.tsx',
   },

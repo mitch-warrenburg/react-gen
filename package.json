@@ -1,0 +1,25 @@
+{
+  "name": "react-gen",
+  "version": "1.0.0",
+  "description": "Tools for developing applications with react.",
+  "author": "Mitch Warrenburg",
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://github.com/mitch-warrenburg/cgen#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitch-warrenburg/cgen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mitch-warrenburg/cgen/issues"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "lerna run build",
+    "release": "lerna publish patch --yes"
+  },
+  "dependencies": {
+    "pug": "^3.0.0",
+    "shelljs": "^0.8.4"
+  }
+}

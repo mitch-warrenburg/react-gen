@@ -1,0 +1,15 @@
+{
+  "reactTs": {
+    "fileNames": {
+      "test": "#{componentName}.test.tsx",
+      "index": "index.ts",
+      "types": "types.ts",
+      "component": "#{componentName}.tsx"
+    },
+    "outPath": "./src/components/#{componentName}",
+    "templates": {
+      "includePaths": [
+        "src/templates/react-ts"
+      ] }
+  }
+}

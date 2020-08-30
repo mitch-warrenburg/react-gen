@@ -1,28 +1,25 @@
 #!/usr/bin/env node
-import { program } from 'commander';
+const { program } = require('commander');
+const { cgenCli } = require('@react-gen/cgen');
 
-const cli = () => {
-  program.version('1.0.1');
+program.version('1.0.1');
 
-  program
-    .command('cgen <parameters...>')
-    .option('-O, --overwrite', 'Overwrite file if it exists.')
-    .option('-F, --fail-fast', 'Terminate process immediately on failure')
-    .description('wow omg')
-    .action((parameters, options) => {
-      console.log(options.overwrite);
-    })
-    .on('--help', function () {
-      console.log('');
-      console.log('Examples:');
-      console.log('');
-      console.log('  $ deploy exec sequential');
-      console.log('  $ deploy exec async');
-    });
+program
+  .command('cgen <jobName> <parameters...>')
+  .option('-O, --overwrite', 'Overwrite file if it exists.')
+  .option('-F, --fail-fast', 'Terminate process immediately on failure')
+  .description('wow omg')
+  .action((jobName, parameters, providedOptions) => {
+    const options = {
+      failfast: providedOptions['fail-fast'],
+      overwrite: providedOptions.overwrite,
+    };
 
-  program.parse(process.argv);
-};
+    const cliInput = { parameters, jobName, options };
 
-console.log('about to run');
+    console.log(cliInput);
 
-cli();
+    cgenCli(cliInput);
+  });
+
+program.parse(process.argv);

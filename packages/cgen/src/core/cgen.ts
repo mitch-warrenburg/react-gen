@@ -1,7 +1,14 @@
+const path = require('path');
 const shell = require('shelljs');
-import * as path from 'path';
 import { LocalsObject } from 'pug';
-import { CgenConfig, JobConfig, ProjectArchetypeName, TemplatesConfig } from '../types';
+import {
+  JobConfig,
+  CgenConfig,
+  CgenCliInput,
+  CgenCliOptions,
+  TemplatesConfig,
+  ProjectArchetypeName,
+} from '../types';
 import {
   logger,
   mergeDeep,
@@ -9,8 +16,8 @@ import {
   resolvePaths,
   logCgenConfig,
   resolveFilePath,
-  compileTemplateFile,
   logGeneratedContent,
+  compileTemplateFile,
   logFatalAndTerminate,
 } from '../utils';
 import {
@@ -20,13 +27,65 @@ import {
   DEFAULT_TEMPLATE_INCLUDE_PATHS,
 } from '../constants';
 
-export const cgen = (
+export const cgenCli = ({
+  parameters = [],
+  options = {},
   jobName = '',
-  config: CgenConfig = {},
-  properties: LocalsObject = {}
-) => {
-  console.log('\n');
+}: CgenCliInput) => {
+  const config: CgenConfig = getCgenConfig();
 
+  if (!config) {
+    logFatalAndTerminate(
+      new Error(
+        "Unable to locate cgen config.  Provide a cgen.config.json or add 'cgen' to your package.json."
+      )
+    );
+  }
+
+  const properties = parseCliParams(parameters);
+
+  const cliOptions: CgenCliOptions = {
+    failFast: !!options.failFast,
+    overwrite: !!options.overwrite,
+  };
+
+  cgen(jobName, config, properties, cliOptions);
+};
+
+export const getCgenConfig = () => {
+  try {
+    return JSON.parse(shell.cat(shell.find('cgen.config.json')).toString());
+  } catch (e) {
+    try {
+      const pkg = JSON.parse(shell.cat(shell.find('package.json')).toString());
+      return pkg.cgen;
+    } catch (e) {
+      logFatalAndTerminate(e);
+    }
+  }
+};
+
+const parseCliParams = (parameters: Array<string>): LocalsObject => {
+  try {
+    return parameters.reduce((accum, param) => {
+      const [key, value] = param.split(':');
+
+      return {
+        ...accum,
+        [key]: value,
+      };
+    }, {});
+  } catch (e) {
+    logFatalAndTerminate(e);
+  }
+};
+
+export const cgen = (
+  jobName,
+  config: CgenConfig = {},
+  properties: LocalsObject = {},
+  option: CgenCliOptions = {}
+) => {
   const { base: baseJobConfig, ...jobs } = config;
 
   if (!jobs[jobName]) {
@@ -97,7 +156,7 @@ const generateFileFromTemplate = (
   if (fileExists) {
     logger.info(
       'File %s already exists.  Skipping %s...',
-      path.basename(templatePath),
+      path.basename(fileOutputPath),
       path.basename(templatePath)
     );
   } else {

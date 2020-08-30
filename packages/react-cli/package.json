@@ -5,10 +5,10 @@
   "author": "Mitch Warrenburg <mitchwarrenburg@yahoo.com>",
   "homepage": "https://github.com/mitch-warrenburg/cgen/tree/master/packages/react-cli#readme",
   "license": "MIT",
-  "main": "dist/react-cli.cjs",
-  "files": [
-    "dist"
-  ],
+  "main": "react-cli.cjs",
+  "bin": {
+    "react": "./react-cli.cjs"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -21,7 +21,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format && npm run lint && git add ."
+      "pre-commit": ""
     }
   },
   "dependencies": {
@@ -51,10 +51,11 @@
   },
   "scripts": {
     "start": "node dist/react-cli.cjs",
-    "build": "npm run clean && rollup -c",
-    "clean": "rimraf dist coverage",
-    "develop": "tsnd packages/src/cli/cli.ts",
+    "build": "yarn clean && rollup -c",
+    "clean": "rimraf dist coverage src/components react-cli.cjs",
+    "develop": "tsnd src/react-cli.ts",
     "lint": "eslint 'packages/src/**/*.{js,ts}'",
-    "format": "prettier --write 'packages/src/**/*.{js,ts}'"
+    "format": "prettier --write 'packages/src/**/*.{js,ts}'",
+    "test": "cd ../cgen && yarn build && cd ../react-cli && yarn build && tsnd src/react-cli.ts cgen reactTs componentName:Test"
   }
 }
