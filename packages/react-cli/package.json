@@ -5,9 +5,9 @@
   "author": "Mitch Warrenburg <mitchwarrenburg@yahoo.com>",
   "homepage": "https://github.com/mitch-warrenburg/cgen/tree/master/packages/react-cli#readme",
   "license": "MIT",
-  "main": "react-cli.cjs",
+  "main": "bin/react-cli.cjs",
   "bin": {
-    "react": "./react-cli.cjs"
+    "react": "./bin/react-cli.cjs"
   },
   "publishConfig": {
     "access": "public"

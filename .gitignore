@@ -4,7 +4,7 @@ coverage/
 .cache/
 dist/
 public/
-
+*.tgz
 
 # webstorm
 **/.idea/*
