@@ -5,7 +5,7 @@ coverage/
 dist/
 public/
 *.tgz
-
+bin/
 # webstorm
 **/.idea/*
 !**/.idea/scopes
