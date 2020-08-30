@@ -1,0 +1,60 @@
+{
+  "name": "@react-gen/react-cli",
+  "version": "1.0.0",
+  "description": "CLI for developing applications with react.",
+  "author": "Mitch Warrenburg <mitchwarrenburg@yahoo.com>",
+  "homepage": "https://github.com/mitch-warrenburg/cgen/tree/master/packages/react-cli#readme",
+  "license": "MIT",
+  "main": "dist/react-cli.cjs",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitch-warrenburg/react-gen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mitch-warrenburg/react-gen/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format && npm run lint && git add ."
+    }
+  },
+  "dependencies": {
+    "@react-gen/cgen": "^1.0.0",
+    "commander": "^6.1.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@types/node": "^14.6.0",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "eslint": "^7.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
+    "lerna": "^3.22.1",
+    "prettier": "^2.1.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.26.8",
+    "rollup-plugin-hashbang": "^2.2.2",
+    "rollup-plugin-peer-deps-external": "^2.2.3",
+    "rollup-plugin-typescript2": "^0.27.2",
+    "ts-node-dev": "^1.0.0-pre.60",
+    "typescript": "^4.0.2"
+  },
+  "scripts": {
+    "start": "node dist/react-cli.cjs",
+    "build": "npm run clean && rollup -c",
+    "clean": "rimraf dist coverage",
+    "develop": "tsnd packages/src/cli/cli.ts",
+    "lint": "eslint 'packages/src/**/*.{js,ts}'",
+    "format": "prettier --write 'packages/src/**/*.{js,ts}'"
+  }
+}
